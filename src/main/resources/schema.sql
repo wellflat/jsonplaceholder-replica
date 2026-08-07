@@ -1,0 +1,8 @@
+DROP TABLE IF EXISTS posts;
+
+CREATE TABLE posts (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    user_id BIGINT NOT NULL,
+    title VARCHAR(255) NOT NULL,
+    body TEXT NOT NULL
+);

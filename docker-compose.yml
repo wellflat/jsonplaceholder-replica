@@ -1,0 +1,9 @@
+services:
+  jsonplaceholder-api:
+    build: .
+    image: jsonplaceholder-api:latest
+    container_name: jsonplaceholder-api
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod

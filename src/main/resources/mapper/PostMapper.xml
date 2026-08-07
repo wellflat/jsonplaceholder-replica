@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.wellflat.jsonplaceholder.post.PostMapper">
+
+    <select id="count" resultType="long">
+        SELECT COUNT(*) FROM posts
+        <where>
+            <if test="userId != null">
+                user_id = #{userId}
+            </if>
+        </where>
+    </select>
+
+    <select id="findAllPaged" resultType="net.wellflat.jsonplaceholder.post.Post">
+        SELECT id, user_id, title, body FROM posts
+        <where>
+            <if test="userId != null">
+                user_id = #{userId}
+            </if>
+        </where>
+        <choose>
+            <when test="sort == 'title' and order == 'desc'">
+                ORDER BY title DESC
+            </when>
+            <when test="sort == 'title'">
+                ORDER BY title ASC
+            </when>
+            <when test="sort == 'userId' and order == 'desc'">
+                ORDER BY user_id DESC
+            </when>
+            <when test="sort == 'userId'">
+                ORDER BY user_id ASC
+            </when>
+            <when test="order == 'desc'">
+                ORDER BY id DESC
+            </when>
+            <otherwise>
+                ORDER BY id ASC
+            </otherwise>
+        </choose>
+        <if test="limit != null">
+            LIMIT #{limit} OFFSET #{offset}
+        </if>
+    </select>
+
+    <select id="findById" resultType="net.wellflat.jsonplaceholder.post.Post">
+        SELECT id, user_id, title, body FROM posts WHERE id = #{id}
+    </select>
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO posts (user_id, title, body)
+        VALUES (#{userId}, #{title}, #{body})
+    </insert>
+
+    <update id="update">
+        UPDATE posts
+        SET user_id = #{userId},
+            title = #{title},
+            body = #{body}
+        WHERE id = #{id}
+    </update>
+
+    <update id="patch">
+        UPDATE posts
+        <set>
+            <if test="userId != null">
+                user_id = #{userId},
+            </if>
+            <if test="title != null">
+                title = #{title},
+            </if>
+            <if test="body != null">
+                body = #{body},
+            </if>
+        </set>
+        WHERE id = #{id}
+    </update>
+
+    <delete id="deleteById">
+        DELETE FROM posts WHERE id = #{id}
+    </delete>
+
+</mapper>
