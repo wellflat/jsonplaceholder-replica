@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jsonplaceholder-api
+  labels:
+    app: jsonplaceholder-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: jsonplaceholder-api
+  template:
+    metadata:
+      labels:
+        app: jsonplaceholder-api
+    spec:
+      containers:
+      - name: jsonplaceholder-api
+        image: jsonplaceholder-api:latest
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8080
+        env:
+        - name: SPRING_PROFILES_ACTIVE
+          value: prod
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "250m"
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
