@@ -36,3 +36,8 @@ out/
 
 ### VS Code ###
 .vscode/
+
+### Local Environment Config ###
+scripts/config.env
+.env
+
