@@ -1,23 +1,24 @@
 # JSONPlaceholder Replica (Spring Boot)
 
-Spring Boot で構築した **JSONPlaceholder 互換の Web API** 学習プロジェクトです。  
-RESTful API の基本構造から、3層アーキテクチャ、MyBatis XML マッパー、バリデーション、共通例外処理、ページネーション、Docker コンテナ化、自動テスト（JUnit 5）までを網羅しています。
+Spring Bootで構築した **JSONPlaceholder 互換の Web API** 学習プロジェクトです。  
+RESTful APIの基本構造から、3層アーキテクチャ、MyBatis XMLマッパー、バリデーション、共通例外処理、ページネーション、Docker コンテナ化、自動テスト（JUnit 5）までを実装しています。
 
 ---
 
-## 🛠 技術スタック
+## 技術スタック
 
 | 分類 | 技術 / ライブラリ | バージョン / 詳細 |
 | :--- | :--- | :--- |
 | **Language / Framework** | Java / Spring Boot | Java 25 / Spring Boot 4.0.7 |
 | **Data Access** | MyBatis / H2 Database | MyBatis 4.0.1 (XML Mapper) / H2 In-Memory DB |
 | **API Doc / Validation** | Springdoc OpenAPI / Jakarta Validation | Swagger UI (OpenAPI 3.0) / `@Valid` |
+| **Monitoring / Health** | Spring Boot Actuator | `/actuator/health`, `/actuator/info`, `/actuator/metrics` |
 | **Testing** | JUnit 5 / MockMvc / MyBatis Test | `@SpringBootTest`, `@WebMvcTest`, `@MybatisTest` |
-| **Container / Tool** | Docker / Docker Compose / Lombok | Multi-stage / JRE 25 Alpine |
+| **Container / Tool** | Docker / Docker Compose / Lombok | JRE 25 Alpine |
 
 ---
 
-## 🚀 エンドポイント仕様一覧 (`/posts`)
+## エンドポイント仕様一覧 (`/posts`)
 
 | HTTP Method | パス | 説明 | 備考 |
 | :--- | :--- | :--- | :--- |
@@ -30,18 +31,22 @@ RESTful API の基本構造から、3層アーキテクチャ、MyBatis XML マ�
 
 ---
 
-## 📖 アクセス可能なツール & ドキュメント
+## アクセス可能なツール & ドキュメント
 
 アプリケーション起動後、以下の URL にブラウザからアクセスできます。
 
 - **Swagger UI (APIインタラクティブ仕様書)**: [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html)
+- **Spring Boot Actuator (ヘルスチェック・モニタリング)**:
+  - **ヘルスチェック**: [http://localhost:8080/actuator/health](http://localhost:8080/actuator/health)
+  - **アプリケーション情報 (ビルド情報)**: [http://localhost:8080/actuator/info](http://localhost:8080/actuator/info)
+  - **メトリクス一覧**: [http://localhost:8080/actuator/metrics](http://localhost:8080/actuator/metrics)
 - **H2 Console (Web DB管理画面)**: [http://localhost:8080/h2-console](http://localhost:8080/h2-console)
   - **JDBC URL**: `jdbc:h2:mem:jsondb`
   - **User**: `sa` / **Password**: (空欄)
 
 ---
 
-## 🏃 実行手順
+## 実行手順
 
 ### 1. ローカルで直接起動する場合 (Gradle)
 
@@ -72,7 +77,7 @@ docker compose down
 
 ---
 
-## 📂 プロジェクト構造
+## プロジェクト構造
 
 ```text
 src/
