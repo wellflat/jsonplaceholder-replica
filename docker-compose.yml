@@ -1,8 +1,8 @@
 services:
-  jsonplaceholder-api:
+  jsonplaceholder:
     build: .
-    image: jsonplaceholder-api:latest
-    container_name: jsonplaceholder-api
+    image: jsonplaceholder:latest
+    container_name: jsonplaceholder
     ports:
       - "8080:8080"
     environment:
