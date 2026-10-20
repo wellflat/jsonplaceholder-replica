@@ -1,4 +1,4 @@
 INSERT INTO posts (user_id, title, body) VALUES
-(1, 'sunt aut facere repeat...', 'quia et suscipit...'),
-(1, 'qui est esse', 'est rerum tempore vitae...'),
-(2, 'ea molestias quasi', 'et iusto sed quo iure...');
+(1, 'Welcome to JSONPlaceholder', 'This is the first sample post created by user 1.'),
+(1, 'Getting Started with Spring Boot', 'Learn how to build RESTful APIs using Spring Boot and MyBatis.'),
+(2, 'Building Modern Web APIs', 'Best practices for designing clean and maintainable endpoints.');
