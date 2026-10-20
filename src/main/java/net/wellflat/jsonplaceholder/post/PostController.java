@@ -4,12 +4,14 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Slf4j
 @Tag(name = "Posts API", description = "投稿リソースの取得・作成・更新・削除API")
 @RestController
 @RequestMapping("/posts")
@@ -42,6 +44,9 @@ public class PostController {
             @Parameter(description = "順序 (asc, desc)")
             @RequestParam(name = "_order", required = false, defaultValue = "asc") String order) {
 
+        log.info("GET /posts called with userId={}, page={}, limit={}, sort={}, order={}",
+                userId, page, limit, sort, order);
+
         long totalCount = postService.count(userId);
         List<Post> posts = postService.findPaged(userId, page, limit, sort, order);
 
@@ -58,6 +63,7 @@ public class PostController {
     @GetMapping("/{id}")
     public ResponseEntity<Post> getPostById(
             @Parameter(description = "投稿ID") @PathVariable Long id) {
+        log.info("GET /posts/{} called", id);
         Post post = postService.findById(id);
         return ResponseEntity.ok(post);
     }
@@ -68,6 +74,7 @@ public class PostController {
     @Operation(summary = "投稿の新規作成", description = "新しい投稿を登録します。")
     @PostMapping
     public ResponseEntity<Post> createPost(@Valid @RequestBody PostRequest request) {
+        log.info("POST /posts called with userId={}, title={}", request.userId(), request.title());
         Post createdPost = postService.create(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdPost);
     }
@@ -80,6 +87,7 @@ public class PostController {
     public ResponseEntity<Post> updatePost(
             @Parameter(description = "投稿ID") @PathVariable Long id,
             @Valid @RequestBody PostRequest request) {
+        log.info("PUT /posts/{} called with userId={}, title={}", id, request.userId(), request.title());
         Post updatedPost = postService.update(id, request);
         return ResponseEntity.ok(updatedPost);
     }
@@ -92,6 +100,7 @@ public class PostController {
     public ResponseEntity<Post> patchPost(
             @Parameter(description = "投稿ID") @PathVariable Long id,
             @Valid @RequestBody PostPatchRequest request) {
+        log.info("PATCH /posts/{} called with userId={}, title={}", id, request.userId(), request.title());
         Post patchedPost = postService.patch(id, request);
         return ResponseEntity.ok(patchedPost);
     }
@@ -103,6 +112,7 @@ public class PostController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deletePost(
             @Parameter(description = "投稿ID") @PathVariable Long id) {
+        log.info("DELETE /posts/{} called", id);
         postService.deleteById(id);
         return ResponseEntity.noContent().build();
     }
