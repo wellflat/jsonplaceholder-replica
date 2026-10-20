@@ -42,7 +42,7 @@ class PostMapperTest {
     void testFindById() {
         Optional<Post> post = postMapper.findById(1L);
         assertThat(post).isPresent();
-        assertThat(post.get().getTitle()).isEqualTo("sunt aut facere repeat...");
+        assertThat(post.get().getTitle()).isEqualTo("Welcome to JSONPlaceholder");
     }
 
     @Test

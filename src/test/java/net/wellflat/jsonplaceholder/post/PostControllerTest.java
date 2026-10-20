@@ -62,9 +62,9 @@ class PostControllerTest {
                         .param("_sort", "title")
                         .param("_order", "desc"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$[0].title").value("sunt aut facere repeat..."))
-                .andExpect(jsonPath("$[1].title").value("qui est esse"))
-                .andExpect(jsonPath("$[2].title").value("ea molestias quasi"));
+                .andExpect(jsonPath("$[0].title").value("Welcome to JSONPlaceholder"))
+                .andExpect(jsonPath("$[1].title").value("Getting Started with Spring Boot"))
+                .andExpect(jsonPath("$[2].title").value("Building Modern Web APIs"));
     }
 
     @Test
@@ -82,7 +82,7 @@ class PostControllerTest {
         mockMvc.perform(get("/posts/1"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(1))
-                .andExpect(jsonPath("$.title").value("sunt aut facere repeat..."));
+                .andExpect(jsonPath("$.title").value("Welcome to JSONPlaceholder"));
     }
 
     @Test
@@ -167,7 +167,7 @@ class PostControllerTest {
                 .andExpect(jsonPath("$.id").value(1))
                 .andExpect(jsonPath("$.userId").value(1)) // 元のまま保持
                 .andExpect(jsonPath("$.title").value("Patched Title Only"))
-                .andExpect(jsonPath("$.body").value("quia et suscipit...")); // 元のまま保持
+                .andExpect(jsonPath("$.body").value("This is the first sample post created by user 1.")); // 元のまま保持
     }
 
     @Test
