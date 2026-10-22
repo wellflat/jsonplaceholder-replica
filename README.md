@@ -9,7 +9,7 @@ RESTful APIの基本構造から、3層アーキテクチャ、MyBatis XMLマッ
 
 | 分類 | 技術 / ライブラリ | バージョン / 詳細 |
 | :--- | :--- | :--- |
-| **Language / Framework** | Java / Spring Boot | Java 25 / Spring Boot 4.0.7 |
+| **Language / Framework** | Java / Spring Boot | Java 25 / Spring Boot 4.0.8 |
 | **Data Access** | MyBatis / H2 Database | MyBatis 4.0.1 (XML Mapper) / H2 In-Memory DB |
 | **API Doc / Validation** | Springdoc OpenAPI / Jakarta Validation | Swagger UI (OpenAPI 3.0) / `@Valid` |
 | **Monitoring / Health** | Spring Boot Actuator | `/actuator/health`, `/actuator/info`, `/actuator/metrics` |
